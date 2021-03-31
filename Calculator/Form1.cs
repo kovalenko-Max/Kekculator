@@ -21,45 +21,52 @@ namespace Calculator
             InitializeComponent();
         }
 
-        private double Calculate(string firstValue, string calcOperator, string secondValue)
+        private string Calculate()
         {
-            double a = Convert.ToDouble(firstValue);
-            double b = Convert.ToDouble(secondValue);
+            double firstValue = Convert.ToDouble(_firstValue);
+            double secondValue = Convert.ToDouble(_secondValue);
             double result = 0;
 
-            switch (calcOperator)
+            switch (_calcOperator)
             {
                 case "+":
-                    result = a + b;
+                    result = firstValue + secondValue;
                     break;
                 case "-":
-                    result = a - b;
+                    result = firstValue - secondValue;
                     break;
                 case "x":
-                    result = a * b;
+                    result = firstValue * secondValue;
                     break;
                 case "÷":
-                    if (b == 0)
+                    if (secondValue == 0)
                     {
                         Error();
+                        return "Ты чё, дурак?";
                     }
-                    result = a / b;
+                    else
+                    {
+                        result = firstValue / secondValue;
+                    }
+
                     break;
             }
 
-            return result;
+            return result.ToString();
         }
 
         private void Error()
         {
-            throw new NotImplementedException();
+            buttonClear_Click(null, null);
+            PictureSwitcher(pictureBoxError.Name);
+            textBox.Text = "Ты чё, дурак?";
         }
 
         private void ButtonNumeric_Click(object sender, EventArgs e)
         {
             if (sender is Button)
             {
-                pictureBoxWaiting.Visible = true;
+                PictureSwitcher(pictureBoxWaiting.Name);
 
                 Button button = (Button)sender;
                 if (_calcOperator == string.Empty)
@@ -92,10 +99,10 @@ namespace Calculator
                 {
                     _calcOperator = button.Text;
                     _secondValue = textBox.Text;
-                    double result = Calculate(_firstValue, _calcOperator, _secondValue);
-                    textBox.Text = result.ToString();
+                    string result = Calculate();
+                    textBox.Text = result;
                     _secondValue = string.Empty;
-                    _firstValue = result.ToString();
+                    _firstValue = result;
                 }
             }
         }
@@ -103,12 +110,27 @@ namespace Calculator
         private void buttonEqually_Click(object sender, EventArgs e)
         {
             _secondValue = textBox.Text;
-            double result = Calculate(_firstValue, _calcOperator, _secondValue);
-            textBox.Text = result.ToString();
-            _secondValue = string.Empty;
-            _firstValue = result.ToString();
-            pictureBoxWaiting.Visible = false;
-            pictureBoxResult.Visible = true;
+            string result = Calculate();
+
+            if (!result.Equals("Ты чё, дурак?"))
+            {
+                textBox.Text = result;
+                _secondValue = string.Empty;
+                _firstValue = result;
+                PictureSwitcher(pictureBoxResult.Name);
+            }
+        }
+
+        private void buttonComma_Click(object sender, EventArgs e)
+        {
+            if ((textBox.Text != string.Empty) && (!textBox.Text.Contains(".")))
+            {
+                textBox.Text += buttonPoint.Text;
+            }
+            else
+            {
+                Error();
+            }
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -117,9 +139,37 @@ namespace Calculator
             _firstValue = string.Empty;
             _secondValue = string.Empty;
             _calcOperator = string.Empty;
-            pictureBoxWaiting.Visible = false;
-            pictureBoxResult.Visible = false;
-            pictureBoxError.Visible = false;
+            PictureSwitcher("Reset");
+        }
+
+        private void PictureSwitcher(string pictureName)
+        {
+            switch (pictureName)
+            {
+                case "pictureBoxWaiting":
+                    pictureBoxWaiting.Visible = true;
+                    pictureBoxResult.Visible = false;
+                    pictureBoxError.Visible = false;
+                    break;
+
+                case "pictureBoxResult":
+                    pictureBoxWaiting.Visible = false;
+                    pictureBoxResult.Visible = true;
+                    pictureBoxError.Visible = false;
+                    break;
+
+                case "pictureBoxError":
+                    pictureBoxWaiting.Visible = false;
+                    pictureBoxResult.Visible = false;
+                    pictureBoxError.Visible = true;
+                    break;
+
+                case "Reset":
+                    pictureBoxWaiting.Visible = false;
+                    pictureBoxResult.Visible = false;
+                    pictureBoxError.Visible = false;
+                    break;
+            }
         }
     }
 }

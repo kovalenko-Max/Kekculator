@@ -48,7 +48,7 @@ namespace Calculator
             this.buttonThreeNumber = new System.Windows.Forms.Button();
             this.buttonMinus = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
-            this.buttonComma = new System.Windows.Forms.Button();
+            this.buttonPoint = new System.Windows.Forms.Button();
             this.buttonPlus = new System.Windows.Forms.Button();
             this.buttonZerroNumber = new System.Windows.Forms.Button();
             this.buttonEqually = new System.Windows.Forms.Button();
@@ -289,17 +289,18 @@ namespace Calculator
             this.buttonClear.UseVisualStyleBackColor = false;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
-            // buttonComma
+            // buttonPoint
             // 
-            this.buttonComma.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonComma.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonComma.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.buttonComma.Location = new System.Drawing.Point(331, 187);
-            this.buttonComma.Name = "buttonComma";
-            this.buttonComma.Size = new System.Drawing.Size(100, 50);
-            this.buttonComma.TabIndex = 24;
-            this.buttonComma.Text = ",";
-            this.buttonComma.UseVisualStyleBackColor = false;
+            this.buttonPoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPoint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.buttonPoint.Location = new System.Drawing.Point(331, 187);
+            this.buttonPoint.Name = "buttonPoint";
+            this.buttonPoint.Size = new System.Drawing.Size(100, 50);
+            this.buttonPoint.TabIndex = 24;
+            this.buttonPoint.Text = ".";
+            this.buttonPoint.UseVisualStyleBackColor = false;
+            this.buttonPoint.Click += new System.EventHandler(this.buttonComma_Click);
             // 
             // buttonPlus
             // 
@@ -346,7 +347,7 @@ namespace Calculator
             this.groupBox.Controls.Add(this.buttonEqually);
             this.groupBox.Controls.Add(this.buttonZerroNumber);
             this.groupBox.Controls.Add(this.buttonPlus);
-            this.groupBox.Controls.Add(this.buttonComma);
+            this.groupBox.Controls.Add(this.buttonPoint);
             this.groupBox.Controls.Add(this.buttonClear);
             this.groupBox.Controls.Add(this.buttonMinus);
             this.groupBox.Controls.Add(this.buttonThreeNumber);
@@ -417,7 +418,7 @@ namespace Calculator
         private System.Windows.Forms.Button buttonThreeNumber;
         private System.Windows.Forms.Button buttonMinus;
         private System.Windows.Forms.Button buttonClear;
-        private System.Windows.Forms.Button buttonComma;
+        private System.Windows.Forms.Button buttonPoint;
         private System.Windows.Forms.Button buttonPlus;
         private System.Windows.Forms.Button buttonZerroNumber;
         private System.Windows.Forms.Button buttonEqually;
